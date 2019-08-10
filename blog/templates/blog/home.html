@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+{% extends 'base.html' %}
+
+{% block content %}
+{% load staticfiles %}
+    <!--<image src="media/images/full.png"></image>-->
+        <style>
+              body {
+              background-image: 
+                  url("https://steamuserimages-a.akamaihd.net/ugc/858353114790671670/D6D5941E4F7D52A743FF15ABD447D3717F7B61EE/");
+              background-position: center center;
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+              background-size: cover;
+              background-color: #464646;
+              background-color: rgba(255, 0, 0, 0.6);
+              font-size: 25px;
+              font-family: 'Jua', sans-serif;
+              opacity: 0.9px;
+              }
+
+              #result {
+                  width: 1094px;
+                  height: 80px;
+                  background-color: black;
+                  text-align: center;
+                  font-size: 30px;
+                  color: white;
+                  border-radius: 20px 20px 20px 20px;
+                  padding: 15px;
+                  margin-bottom: 10px;
+                  font-family: 'Jua', sans-serif;
+              }
+
+              #btn-submit {
+                  background-color: black;
+                  color: white;
+                  width: 280px;
+                  height: 90px;
+                  font-size: 30px;
+                  margin-left: 0%;
+                  margin-right: 27%;
+                  border-radius: 15px 15px 15px 15px;
+              }
+
+              #container, #card, #complete_list {
+                  padding: 20px 20px 20px 20px;
+                  width: 1094px;
+              }
+              .makecenter {
+                  padding-left: 36%;
+              }
+
+              #makecolor {
+                  color: #ffe4a0;
+              }
+
+              #complete-color, #edit-color {
+                  color: #8c6dff
+              }
+
+              #title-complete-list {
+                  font-size: 35px;
+                  color: black;
+              }
+
+        </style>
+
+    <br>
+        <div class = "makecenter">
+        {% if imageminus %}
+        <image src="{% static 'none1.png' %}">
+        {% endif %}
+        {% if image0 %}
+        <image src="{% static '11.png' %}">
+        <!--<image src="media/images/0.jpeg"></image>-->
+        {% endif %}
+        {% if image1 %}
+        <image src="{% static '22.png'%}">
+        <!--<image src="media/images/1.jpeg"></image>-->
+        {% endif %}
+        {% if image2 %}
+        <image src="{% static '33.png'%}">
+        <!--<image src="media/images/2.jpeg"></image>-->
+        {% endif %}
+        {% if image3 %}
+        <image src="{% static '44.png' %}">
+        <!--<image src="media/images/3.jpeg"></image>-->
+        {% endif %}
+        {% if image4 %}
+        <image src="{% static '55.png' %}">
+        <!--<image src="media/images/4.jpeg"></image>-->
+        {% endif %}
+        </div>
+    <br>
+    <br>
+
+ 
+        <form action="{% url 'create' %}">
+            <textarea cols=80 rows= 5 name="body"></textarea>
+            <input class="btn-submit" id="btn-submit" type="submit" value="리스트 추가!">
+        </form>
+
+
+    <br>
+
+
+    <div>
+    <div class="result" div id="result">
+    이 버킷리스트를 수행하세요!:<span id= "makecolor"> {{ random_result }} </span>
+    </div>
+    
+
+
+    {% for blog in blogs.all %}
+        {% if blog.author == request.user %}
+            {% if blog.complete == False %}
+        <div class="container" div id="container">
+            <div class="card" div id="card">
+                <p class="card-text">{{ blog.pub_date }}</p>
+                <div class="card-body">
+                    <!-- 타이틀: {{ blog.title }} -->
+                    <!-- <p class="card-text">{{ blog.author }}</p> -->
+                    <p class="card-text">{{ blog.body }}</p>
+                    <div class="delete">
+                        <button><a href="{% url 'complete' blog.id %}"><span id="complete-color">완료</span></a></button>
+                    </div>
+                    <div class="edit">
+                        <button><a href="{% url 'edit' blog.id %}"><span id="edit-color">수정</span></a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    </div>
+
+    <br>
+    <br>
+
+    <div class="complete_list">
+        <div class="container">
+        <div class="card">
+        
+        <div id="complete_list">
+        <span id="title-complete-list">완료 목록</span>
+        <br>
+        {% for blog in blogs.all %}
+            {% if blog.author == request.user %}
+                {% if blog.complete == True %}
+                    <p>{{blog.body}}</p>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        function beerequipment() {
+            $(window).scrollTop($("*:contains('BEER EQUIPMENT'):last").offset().top);
+        }
+    </script>
+{% endblock %}
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+
+
+
+<html>
+{% extends 'base.html' %}
+
+{% block content %}
+{% load staticfiles %}
+  <head>
+  
+      <title> Bucket List </title>
+          <style>
+              body {
+              background-image: url("https://steamuserimages-a.akamaihd.net/ugc/858353114790671670/D6D5941E4F7D52A743FF15ABD447D3717F7B61EE/");
+            
+              background-position: center center;
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+              background-size: cover;
+              background-color: #464646;
+              }
+
+              h1 {
+              font-size: 85px;
+              font-family: 'Aldrich', sans-serif;
+              color: white;
+              text-align: center;
+              }
+
+              p {
+              font-size: 80px;
+              font-family: 'Aldrich', sans-serif;
+              color: white;
+              text-align: center;
+              }
+
+              #logo {
+                text-align: center;
+              }
+
+  </style>
+  </head>
+
+  <body>
+  <br><br>
+       <h1> List up your dreams! </h1>
+       <div id = logo>
+       <a href="{%url 'home' %}"> <image src="{% static 'full3.png' %}" alt="centered image" height ="400" class ="center-center" ></a>
+       </div>
+     <p>Get started!</p>
+
+  </body>
+
+
+{% endblock %}
+
+</html>
+
+
